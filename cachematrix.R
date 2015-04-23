@@ -26,18 +26,18 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
     #get inverse of matrix x
     my_inv <- x$f_get_inv()
-    # return the cached matrix, if available
-    if (!is.null(my_inv)) {
-        message("Retrieving cached inverse matrix")
-    }
-    # otherwise, calculate the inverse
-    else {
+    # calculate the inverse, if needed
+    if (is.null(my_inv)) {
         message("Caching inverse matrix")
         my_data <- x$f_get()
         my_inv <- solve(my_data, ...)
+        # cache the inverse
+        x$f_set_inv(my_inv)
     }
-    # cache the inverse
-    x$f_set_inv(my_inv)
+    # otherwise, alert that cached inverse will be used
+    else {
+        message("Retrieving cached inverse matrix")
+    }
     # return inverse of matrix x
     return(my_inv)
 }
