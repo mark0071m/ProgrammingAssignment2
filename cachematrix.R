@@ -36,7 +36,7 @@ cacheSolve <- function(x, ...) {
     }
     # otherwise, alert that cached inverse will be used
     else {
-        message("Retrieving cached inverse matrix")
+        message("Retrieved cached inverse matrix")
     }
     # return inverse of matrix x
     return(my_inv)
